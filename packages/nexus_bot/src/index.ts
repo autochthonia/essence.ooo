@@ -1,20 +1,20 @@
 import nodeFetch from "node-fetch";
 import * as Sentry from "@sentry/node";
-import * as Integrations from "@sentry/integrations";
 
 const globalAny: any = global;
 globalAny.fetch = nodeFetch;
 
 const lfgRoleId = "219509431967154176";
+const lfgPaidRoleId = "TODO";
 
 Sentry.init({
   dsn: "https://9656fc1c24a84d66a89f079981d684b7@sentry.io/1860567",
   environment: process.env.NODE_ENV,
   integrations: [
     Sentry.captureConsoleIntegration({
-      levels: ["error"]
-    })
-  ]
+      levels: ["error"],
+    }),
+  ],
 });
 
 export default async (event: { body: string }) => {
@@ -32,7 +32,9 @@ export default async (event: { body: string }) => {
       | "medium"
       | "players"
       | "title"
-      | "schedule",
+      | "schedule"
+      | "paid"
+      | "cost",
       string
     >;
   };
@@ -57,7 +59,7 @@ export default async (event: { body: string }) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          content: `Hey <@&${lfgRoleId}>! <@${user.id}> is hosting a game.`,
+          content: `Hey <@&${listing?.paid ? lfgPaidRoleId : lfgRoleId}>! <@${user.id}> is hosting a game.`,
           // username: user.username,
           // avatar_url: `https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.png?size=128`,
           embeds: [
@@ -95,6 +97,16 @@ export default async (event: { body: string }) => {
                   name: "Players",
                   value: listing.players,
                   inline: true
+                },
+                listing?.paid !== undefined && {
+                  name: "Paid",
+                  value: listing.paid ? "Yes" : "No",
+                  inline: true,
+                },
+                listing?.paid !== undefined && listing?.cost && {
+                  name: "Session cost",
+                  value: "$"+listing.cost,
+                  inline: true,
                 },
                 listing?.schedule && {
                   name: "Schedule",
