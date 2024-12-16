@@ -79,7 +79,12 @@ const CreateListingPage: FunctionComponent = () => {
                   display: "contents", // Ensures grid layout applies to inner elements
                 }}
               >
-                <Field name="title" label="Game Name" maxLength={256} gridColumn="span 2" />
+                <Field
+                  name="title"
+                  label="Game Name"
+                  maxLength={256}
+                  gridColumn="span 2"
+                />
 
                 <Field
                   name="description"
@@ -108,12 +113,10 @@ const CreateListingPage: FunctionComponent = () => {
                 <SelectField
                   name="edition"
                   label="Edition"
-                  options={["Third", "Essence", "First", "Second"].map(
-                    (v) => ({
-                      label: v,
-                      value: v,
-                    })
-                  )}
+                  options={["Third", "Essence", "First", "Second"].map((v) => ({
+                    label: v,
+                    value: v,
+                  }))}
                 />
 
                 <SelectField
@@ -136,18 +139,17 @@ const CreateListingPage: FunctionComponent = () => {
                   max="100"
                 />
 
-                <BooleanField
-                  name="paid"
-                  label="Paid Game"
-                />
+                <BooleanField name="paid" label="Paid Game" />
 
-                <fieldset disabled={!values.paid}
+                <fieldset
+                  disabled={!values.paid}
                   style={{
                     border: "none", // Remove fieldset border if desired
                     padding: 0,
                     margin: 0,
                     display: "contents", // Ensures grid layout applies to inner elements
-                  }}>
+                  }}
+                >
                   <Field
                     name="cost"
                     label="Session cost"
@@ -157,9 +159,22 @@ const CreateListingPage: FunctionComponent = () => {
                   />
                 </fieldset>
 
-                <Field name="schedule" label="Schedule" maxLength={1024} gridColumn="span 2"/>
+                <Field
+                  name="schedule"
+                  label="Schedule"
+                  maxLength={1024}
+                  gridColumn="span 2"
+                />
 
-                <button type="submit" disabled={!isValid || isSubmitting} style={{ gridColumn: "span 2", justifySelf: "center", width:200 }}>
+                <button
+                  type="submit"
+                  disabled={!isValid || isSubmitting}
+                  style={{
+                    gridColumn: "span 2",
+                    justifySelf: "center",
+                    width: 200,
+                  }}
+                >
                   Create Listing
                 </button>
               </fieldset>
