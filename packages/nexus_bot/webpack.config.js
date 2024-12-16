@@ -1,7 +1,7 @@
 // Import path for resolving file paths
 var path = require("path");
 module.exports = {
-  mode: "development",
+  mode: "production",
   target: "node",
   devtool: false,
   // Specify the entry point for our app.
