@@ -54,7 +54,7 @@ const CreateListingPage: FunctionComponent = () => {
           }
         }}
       >
-        {({ isValid }) => (
+        {({ isValid, isSubmitting }) => (
           <Fragment>
             {/* {error && <span>{error.message}</span>} */}
             <Form
@@ -131,7 +131,7 @@ const CreateListingPage: FunctionComponent = () => {
                 </div>
                 <Field name="schedule" label="Schedule" maxLength={1024} />
 
-                <button type="submit" disabled={!isValid}>
+                <button type="submit" disabled={!isValid || isSubmitting}>
                   Create Listing
                 </button>
               </fieldset>

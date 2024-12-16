@@ -24,7 +24,7 @@ const LoginOrganism: FunctionComponent = () => {
   }, [cookie, setUser]);
   return (
     <div>
-      <span>Login Status {user ? "Logged In" : "Logged Out"}</span>
+      <span>Login Status: {user ? "Logged In" : "Logged Out"}</span>
       {!user && (
         <a
           href={`https://discordapp.com/api/oauth2/authorize?redirect_uri=${
