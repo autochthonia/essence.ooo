@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/browser";
-import * as Integrations from "@sentry/integrations";
 import { mount, route } from "navi";
 import React, { FunctionComponent, lazy, Suspense } from "react";
 import { Router, View } from "react-navi";

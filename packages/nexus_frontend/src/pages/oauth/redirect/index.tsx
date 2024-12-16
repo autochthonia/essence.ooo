@@ -5,7 +5,6 @@ import getHashParams from "../../../util/getHashParams";
 import Cookies from "js-cookie";
 import addSeconds from "date-fns/addSeconds";
 import discordLookup from "../../../services/auth/discordLookup";
-import pick from "lodash/pick";
 
 const OauthRedirectPage: FunctionComponent = () => {
   const {
