@@ -2598,7 +2598,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "essence.ooo@workspace:."
   dependencies:
-    lerna: "npm:^3.19.0"
+    lerna: "npm:^3.22.1"
     prettier: "npm:^1.19.1"
   languageName: unknown
   linkType: soft
@@ -4178,7 +4178,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lerna@npm:^3.19.0":
+"lerna@npm:^3.22.1":
   version: 3.22.1
   resolution: "lerna@npm:3.22.1"
   dependencies:
