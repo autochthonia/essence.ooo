@@ -20,7 +20,9 @@
     "info": "lerna info"
   },
   "devDependencies": {
-    "lerna": "^3.22.1",
     "prettier": "^1.19.1"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
