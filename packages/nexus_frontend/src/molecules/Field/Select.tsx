@@ -9,7 +9,7 @@ const SelectField: FunctionComponent<{
   const [props, meta] = useField(name);
   return (
     <label>
-      <span>{label}</span>
+      <span style={{ marginRight: 8 }}>{label}</span>
       <select {...props}>
         {options.map(o => (
           <option key={o.value} value={o.value}>

@@ -5,6 +5,7 @@ import useAuthContext from "../../../services/auth";
 import LoginOrganism from "../../../organisms/login";
 import Field from "../../../molecules/Field";
 import SelectField from "../../../molecules/Field/Select";
+import BooleanField from "../../../molecules/Field/Boolean";
 import createListing from "./createListing";
 import Cookies from "js-cookie";
 
@@ -38,6 +39,8 @@ const CreateListingPage: FunctionComponent = () => {
           schedule: "",
           players: 5,
           owner_id: toNumber(user?.id),
+          paid: false,
+          cost: 0,
         }}
         onSubmit={async (variables, formik) => {
           try {
@@ -54,13 +57,14 @@ const CreateListingPage: FunctionComponent = () => {
           }
         }}
       >
-        {({ isValid, isSubmitting }) => (
+        {({ values, isValid, isSubmitting }) => (
           <Fragment>
             {/* {error && <span>{error.message}</span>} */}
             <Form
               style={{
-                display: "flex",
-                flexDirection: "column",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                gap: "16px", // Space between grid items
               }}
             >
               <fieldset
@@ -68,70 +72,109 @@ const CreateListingPage: FunctionComponent = () => {
                   !user
                   // || loading
                 }
+                style={{
+                  border: "none", // Remove fieldset border if desired
+                  padding: 0,
+                  margin: 0,
+                  display: "contents", // Ensures grid layout applies to inner elements
+                }}
               >
-                <Field name="title" label="Game Name" maxLength={256} />
+                <Field
+                  name="title"
+                  label="Game Name"
+                  maxLength={256}
+                  gridColumn="span 2"
+                />
+
                 <Field
                   name="description"
                   label="Description"
                   fieldType="textarea"
                   maxLength={2048}
+                  gridColumn="span 2"
                 />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <SelectField
-                    name="splat"
-                    label="Splat"
-                    options={[
-                      "Solars",
-                      "Dragon-Blooded",
-                      "Lunars",
-                      "Other",
-                    ].map((v) => ({ label: v, value: v }))}
-                  />
-                  <SelectField
-                    name="edition"
-                    label="Edition"
-                    options={["Third", "Essence", "First", "Second"].map(
-                      (v) => ({
-                        label: v,
-                        value: v,
-                      })
-                    )}
-                  />
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <SelectField
-                    name="medium"
-                    label="Medium"
-                    options={["Online Voice", "Online Text", "In Person"].map(
-                      (v) => ({
-                        label: v,
-                        value: v,
-                      })
-                    )}
-                  />
 
+                <SelectField
+                  name="splat"
+                  label="Splat"
+                  options={[
+                    "Solars",
+                    "Dragon-Blooded",
+                    "Lunars",
+                    "Sidereals",
+                    "Abyssals",
+                    "Alchemicals",
+                    "Infernals",
+                    "Mixed Splat",
+                    "Other",
+                  ].map((v) => ({ label: v, value: v }))}
+                />
+
+                <SelectField
+                  name="edition"
+                  label="Edition"
+                  options={["Third", "Essence", "First", "Second"].map((v) => ({
+                    label: v,
+                    value: v,
+                  }))}
+                />
+
+                <SelectField
+                  name="medium"
+                  label="Medium"
+                  options={["Online Voice", "Online Text", "In Person"].map(
+                    (v) => ({
+                      label: v,
+                      value: v,
+                    })
+                  )}
+                />
+
+                <Field
+                  name="players"
+                  label="Players"
+                  fieldType="number"
+                  flexDirection="row"
+                  placeholder="0"
+                  max="100"
+                />
+
+                <BooleanField name="paid" label="Paid Game" />
+
+                <fieldset
+                  disabled={!values.paid}
+                  style={{
+                    border: "none", // Remove fieldset border if desired
+                    padding: 0,
+                    margin: 0,
+                    display: "contents", // Ensures grid layout applies to inner elements
+                  }}
+                >
                   <Field
-                    name="players"
-                    label="Players"
+                    name="cost"
+                    label="Session cost"
                     fieldType="number"
                     flexDirection="row"
                     placeholder="0"
-                    max="100"
                   />
-                </div>
-                <Field name="schedule" label="Schedule" maxLength={1024} />
+                </fieldset>
 
-                <button type="submit" disabled={!isValid || isSubmitting}>
+                <Field
+                  name="schedule"
+                  label="Schedule"
+                  maxLength={1024}
+                  gridColumn="span 2"
+                />
+
+                <button
+                  type="submit"
+                  disabled={!isValid || isSubmitting}
+                  style={{
+                    gridColumn: "span 2",
+                    justifySelf: "center",
+                    width: 200,
+                  }}
+                >
                   Create Listing
                 </button>
               </fieldset>

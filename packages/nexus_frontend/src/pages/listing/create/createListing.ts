@@ -4,7 +4,9 @@ const createListing = async (options: {
     "splat" | "description" | "edition" | "medium" | "title" | "schedule",
     string
   > &
-    Record<"players", number>;
+    Record<"players" | "cost", number>
+    &
+    Record <"paid", boolean>;
 }) => {
   const response = await fetch(process.env.REACT_APP_API_GATEWAY as string, {
     method: "POST",
