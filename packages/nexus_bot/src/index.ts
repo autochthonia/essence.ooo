@@ -5,7 +5,7 @@ const globalAny: any = global;
 globalAny.fetch = nodeFetch;
 
 const lfgRoleId = "219509431967154176";
-const lfgPaidRoleId = "TODO";
+const lfgRoleNoPaidId = "1318336282337874022";
 
 Sentry.init({
   dsn: "https://9656fc1c24a84d66a89f079981d684b7@sentry.io/1860567",
