@@ -5,11 +5,11 @@ const BooleanField: FunctionComponent<{
   name: string;
   label?: string;
 }> = ({ name, label = name }) => {
-  const [props, meta] = useField({name, type: "checkbox"});
+  const [props, meta] = useField({ name, type: "checkbox" });
   return (
     <label>
       <span>{label}</span>
-      <input type="checkbox" {...props}/>
+      <input type="checkbox" {...props} />
     </label>
   );
 };
