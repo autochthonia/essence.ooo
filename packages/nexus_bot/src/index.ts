@@ -1,8 +1,6 @@
 import nodeFetch from "node-fetch";
 import * as Sentry from "@sentry/node";
 import * as Integrations from "@sentry/integrations";
-import { Listing } from "../graphql/types.generated";
-import Maybe from "graphql/tsutils/Maybe";
 
 const globalAny: any = global;
 globalAny.fetch = nodeFetch;
@@ -13,10 +11,10 @@ Sentry.init({
   dsn: "https://9656fc1c24a84d66a89f079981d684b7@sentry.io/1860567",
   environment: process.env.NODE_ENV,
   integrations: [
-    new Integrations.CaptureConsole({
-      levels: ["error"],
-    }),
-  ],
+    Sentry.captureConsoleIntegration({
+      levels: ["error"]
+    })
+  ]
 });
 
 export default async (event: { body: string }) => {
@@ -41,9 +39,9 @@ export default async (event: { body: string }) => {
   // get user details
   const user = await fetch("https://discordapp.com/api/v6/users/@me", {
     headers: {
-      authorization: discordToken,
-    },
-  }).then((r) => r.json());
+      authorization: discordToken
+    }
+  }).then(r => r.json());
 
   console.log(user);
 
@@ -56,7 +54,7 @@ export default async (event: { body: string }) => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           content: `Hey <@&${lfgRoleId}>! <@${user.id}> is hosting a game.`,
@@ -81,39 +79,39 @@ export default async (event: { body: string }) => {
                 listing?.splat && {
                   name: "Splat",
                   value: listing.splat,
-                  inline: true,
+                  inline: true
                 },
                 listing?.edition && {
                   name: "Edition",
                   value: listing.edition,
-                  inline: true,
+                  inline: true
                 },
                 listing?.medium && {
                   name: "Medium",
                   value: listing.medium,
-                  inline: true,
+                  inline: true
                 },
                 listing?.players && {
                   name: "Players",
                   value: listing.players,
-                  inline: true,
+                  inline: true
                 },
                 listing?.schedule && {
                   name: "Schedule",
-                  value: listing.schedule,
-                },
+                  value: listing.schedule
+                }
               ].filter(Boolean),
               // image: {
               //   url: "https://i.imgur.com/wSTFkRM.png"
               // },
               timestamp: new Date(),
               footer: {
-                text: "ne❌us",
+                text: "ne❌us"
                 // icon_url: "https://i.imgur.com/wSTFkRM.png"
-              },
-            },
-          ],
-        }),
+              }
+            }
+          ]
+        })
       }
     );
     console.log("Done Posting");
@@ -121,12 +119,12 @@ export default async (event: { body: string }) => {
     console.log(response);
     console.log(body);
     return {
-      statusCode: response.status,
+      statusCode: response.status
     };
   } catch (ex) {
     console.error(ex);
     return {
-      statusCode: "500",
+      statusCode: "500"
     };
   }
 };

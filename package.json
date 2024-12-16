@@ -1,8 +1,8 @@
 {
-  "name": "root",
+  "name": "essence.ooo",
+  "packageManager": "yarn@4.5.3",
   "private": true,
   "scripts": {
-    "codegen:graphql": "graphql-codegen",
     "publish": "lerna publish",
     "version": "lerna version",
     "bootstrap": "lerna bootstrap",
@@ -20,19 +20,9 @@
     "info": "lerna info"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.9.1",
-    "@graphql-codegen/fragment-matcher": "^1.9.1",
-    "@graphql-codegen/introspection": "^1.9.1",
-    "@graphql-codegen/near-operation-file-preset": "^1.9.1",
-    "@graphql-codegen/typescript": "^1.9.1",
-    "@graphql-codegen/typescript-document-nodes": "^1.9.1",
-    "@graphql-codegen/typescript-graphql-files-modules": "^1.9.1",
-    "@graphql-codegen/typescript-operations": "^1.9.1",
-    "@graphql-codegen/typescript-react-apollo": "^1.9.1",
-    "@graphql-codegen/typescript-resolvers": "^1.9.1",
-    "graphql": "^14.5.8",
-    "lerna": "^3.19.0",
     "prettier": "^1.19.1"
   },
-  "dependencies": {}
+  "workspaces": [
+    "packages/*"
+  ]
 }

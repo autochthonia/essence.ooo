@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/browser";
-import * as Integrations from "@sentry/integrations";
 import { mount, route } from "navi";
 import React, { FunctionComponent, lazy, Suspense } from "react";
 import { Router, View } from "react-navi";
@@ -10,15 +9,15 @@ Sentry.init({
   release: process.env.AWS_COMMIT_ID,
   environment: process.env.NODE_ENV,
   integrations: [
-    new Integrations.CaptureConsole({
+    Sentry.captureConsoleIntegration({
       levels: ["error"],
     }),
   ],
 });
 
-Sentry.configureScope(function(scope) {
-  scope.setTag("origin", window.location.origin);
-  scope.setTag("app", "web");
+Sentry.setTags({
+  origin: window.location.origin,
+  app: "web",
 });
 
 const LazyOauthRedirectPage = lazy(() => import("./pages/oauth/redirect"));
